@@ -4,6 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private GameInput gameInput;
 
     private bool isMoving = false;
 
@@ -14,21 +15,7 @@ public class Player : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        Vector2 inputvector = new Vector2(0, 0);
-        if (Input.GetKey(KeyCode.W)) {
-            inputvector.y += 1;
-        }
-        if (Input.GetKey(KeyCode.S)) {
-            inputvector.y -= 1;
-        }
-        if (Input.GetKey(KeyCode.A)) {
-            inputvector.x -= 1;
-        }
-        if (Input.GetKey(KeyCode.D)) {
-            inputvector.x += 1;
-        }
-
-        inputvector.Normalize();
+        Vector2 inputvector = gameInput.GetInputVectorNormalized();
 
         Vector3 movDir = new Vector3(inputvector.x, 0, inputvector.y);
         isMoving = movDir != Vector3.zero;
