@@ -15,7 +15,22 @@ public class Player : MonoBehaviour {
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
-        
+        gameInput.OnInteractAction += GameInput_OnInteractAction;
+    }
+
+    private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
+        Vector2 inputVector = gameInput.GetInputVectorNormalized();
+        Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
+
+        if (moveDir != Vector3.zero) {
+            lastInteractDir = moveDir;
+        }
+
+        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, counterLayerMask)) {
+            if (raycastHit.transform.TryGetComponent(out ClearCounter counter)) {
+                counter.Interact();
+            }
+        }
     }
 
     // Update is called once per frame
@@ -41,7 +56,7 @@ public class Player : MonoBehaviour {
         if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, counterLayerMask))
         {
             if (raycastHit.transform.TryGetComponent(out ClearCounter counter)) {
-                counter.Interact();
+                //counter.Interact();
             }
         }
 
