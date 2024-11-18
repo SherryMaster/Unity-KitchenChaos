@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &8559169 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4894909677468328963, guid: cd85a0a6bc30a1f418801a3e48e3fa7c, type: 3}
+  m_PrefabInstance: {fileID: 1136531361}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2329c0add0d7f5049aa4af88cbcf6ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,6 +526,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearCounter (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4894909677468328963, guid: cd85a0a6bc30a1f418801a3e48e3fa7c, type: 3}
+      propertyPath: kitchenObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 38588b91d63a8ad43a228aa36711b22c, type: 2}
     - target: {fileID: 5959440397508827693, guid: cd85a0a6bc30a1f418801a3e48e3fa7c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.61
@@ -698,6 +713,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearCounter (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4894909677468328963, guid: cd85a0a6bc30a1f418801a3e48e3fa7c, type: 3}
+      propertyPath: kitchenObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: c5187f15e0fa1a647a5b6c2028e219ee, type: 2}
     - target: {fileID: 5959440397508827693, guid: cd85a0a6bc30a1f418801a3e48e3fa7c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.67
@@ -947,6 +966,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 4894909677468328963, guid: cd85a0a6bc30a1f418801a3e48e3fa7c, type: 3}
+      propertyPath: testing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894909677468328963, guid: cd85a0a6bc30a1f418801a3e48e3fa7c, type: 3}
+      propertyPath: secondCounter
+      value: 
+      objectReference: {fileID: 8559169}
+    - target: {fileID: 4894909677468328963, guid: cd85a0a6bc30a1f418801a3e48e3fa7c, type: 3}
+      propertyPath: kitchenObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 2eff9be6edec2e14abee60b6816539b2, type: 2}
     - target: {fileID: 5959440397508827693, guid: cd85a0a6bc30a1f418801a3e48e3fa7c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.00000005335692
