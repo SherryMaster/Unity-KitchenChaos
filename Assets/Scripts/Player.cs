@@ -33,6 +33,13 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
+        gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
+    }
+
+    private void GameInput_OnInteractAlternateAction(object sender, EventArgs e) {
+        if (selectedCounter) {
+            selectedCounter.InteractAlternate(this);
+        }
     }
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
@@ -93,36 +100,45 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, movDir, moveDistance);
 
         if (!canMove) {
-            Vector3 movDirX = new Vector3(movDir.x, 0, 0);
-            bool canMoveX = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, movDirX, moveDistance);
+            Vector3 movDirX = new Vector3(movDir.x, 0, 0).normalized;
+            canMove = movDir.x != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, movDirX, moveDistance);
 
-            Vector3 movDirZ = new Vector3(0, 0, movDir.z);
-            bool canMoveZ = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, movDirZ, moveDistance);
-
-            if (canMoveX && !canMoveZ) {
+            if (canMove) {
                 movDir = movDirX;
-                canMove = true;
-            }
-            else if (!canMoveX && canMoveZ) {
-                movDir = movDirZ;
-                canMove = true;
             }
             else {
-                canMove = false;
+                Vector3 movDirZ = new Vector3(0, 0, movDir.z).normalized;
+                canMove = movDir.z != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, movDirZ, moveDistance);
+
+                if (canMove) {
+                    movDir = movDirZ;
+                }
+                else {
+
+                }
             }
+
+
+            //if (canMoveX && !canMoveZ) {
+            //    movDir = movDirX;
+            //    canMove = true;
+            //}
+            //else if (!canMoveX && canMoveZ) {
+            //    movDir = movDirZ;
+            //    canMove = true;
+            //}
+            //else {
+            //    canMove = false;
+            //}
         }
 
         if (canMove) {
-            isMoving = movDir != Vector3.zero;
             transform.position += movDir * moveSpeed * Time.deltaTime;
-
-            if (movDir != Vector3.zero) {
-                float rotateSpeed = 10f;
-                transform.forward = Vector3.Slerp(transform.forward, movDir, Time.deltaTime * rotateSpeed);
-            }
         }
-        else {
-            isMoving = false;
+        isMoving = movDir != Vector3.zero;
+        float rotateSpeed = 10f;
+        if (isMoving) {
+            transform.forward = Vector3.Slerp(transform.forward, movDir, Time.deltaTime * rotateSpeed);
         }
     }
 
